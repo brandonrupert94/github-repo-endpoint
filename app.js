@@ -1,13 +1,37 @@
 
 
 
-
-
-
+function showRepoList(responseJson){
+    console.log(responseJson[0]);
+    let repoTitleHtml= '';
+    for (let i = 0; i < responseJson.length; i++) {
+        let url= `"https://api.github.com/users/${responseJson[i].full_name}"`
+        repoTitleHtml += `<li><h2>${responseJson[i].name}</h2>
+            <a href=${url}>${url}</a></h3>
+            </li>`;
+    }
+    $('.list').html(repoTitleHtml);
+};
 
 function retrieveList(){
-    let username = document.getElementById('#git-handle').val();
-    console.log(username);
+     let userName = document.getElementById('git-handle').value;
+    console.log(userName);
+   
+    let url = `https://api.github.com/users/${userName}/repos`;
+    fetch(url)
+        .then(response => {
+            if (response.ok){
+                return response.json();
+            } 
+                throw new Error(response.status);
+            
+        })
+        .then(responseJson => showRepoList(responseJson))
+        .catch(err => {
+            $('.error-message').show();
+        });
+        
+    console.log('retrieveList ran');
 }
 
 
@@ -16,7 +40,7 @@ function retrieveList(){
 
 
 function getRepoList(){
-    $('#git-repo').submit(event => {
+    $('main').submit(event => {
         event.preventDefault();
         retrieveList();
     })
