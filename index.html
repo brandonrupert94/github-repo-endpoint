@@ -11,20 +11,20 @@
 <body>
     <h1>GitHub Repo List</h1>
     <main>
-        <form>
+        <form id="github-repo-form">
             <label for="git-handle">GitHub Handle:</label>
-            <input type="text" class="git-handle" value="" id="git-handle">
+            <input type="text" name="git-handle" id="git-handle" class="git-handle" value="" >
             <input type="submit" class="repo-list" value="Get Repo list!" id="git-repo">
                        
         </form>
         <div class="repo-list-container">
             <ul class="list">
 
-            </ul>>
+            </ul>
         </div>
 
     </main>
-
+    
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
     <script src="app.js"></script>
 </body>
